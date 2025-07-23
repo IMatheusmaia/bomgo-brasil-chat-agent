@@ -2,22 +2,38 @@
 # see: https://firebase.google.com/docs/studio/customize-workspace
 { pkgs, ... }: {
   # Which nixpkgs channel to use.
-  channel = "stable-24.05"; # or "unstable"
+  channel = "stable-25.05"; #stable-24.05"; # or "unstable"
+
+  services = {
+    docker = {
+      enable = true;
+    };
+  };
 
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.maven
     pkgs.nodejs_22
-    pkgs.zulu17
-    # pkgs.go
-    # pkgs.python311
-    # pkgs.python311Packages.pip
-    # pkgs.nodePackages.nodemon
+    pkgs.jdk17
+    #pkgs.graalvmPackages.graalvm-oracle
+    pkgs.awscli2
+    pkgs.aws-sam-cli
+    pkgs.python313
+    pkgs.python313Packages.pip
+    pkgs.localstack
+    pkgs.python313Packages.localstack-client
+    pkgs.jq
+    pkgs.zip
+    pkgs.curl
   ];
 
   # Sets environment variables in the workspace
   env = {
-    PHONE_RECEIVER="whatsapp:+14155238886";
+    LOCALSTACK_AUTH_TOKEN="ls-JIRu0752-liKa-paYA-2551-dexIxEKA028e";
+    AWS_ACCESS_KEY_ID="test";
+    AWS_SECRET_ACCESS_KEY="test";
+    AWS_DEFAULT_REGION="sa-east-1";
+    ACTIVATE_PRO="0";
   };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
