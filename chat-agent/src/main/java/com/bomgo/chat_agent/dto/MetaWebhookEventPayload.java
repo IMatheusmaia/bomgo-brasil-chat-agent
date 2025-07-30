@@ -22,8 +22,8 @@ public record MetaWebhookEventPayload(
             public record Value(
                 String messaging_product,
                 Metadata metadata,
-                Contacts contacts,
-                Messages messages
+                List<Contact> contacts,
+                List<Message> messages
             ) {
                 @JsonIgnoreProperties(ignoreUnknown = true)
                 public record Metadata(
@@ -32,7 +32,7 @@ public record MetaWebhookEventPayload(
                 ) {}
 
                 @JsonIgnoreProperties(ignoreUnknown = true)
-                public record Contacts(
+                public record Contact(
                     String wa_id,
                     String user_id,
                     Profile profile
@@ -44,12 +44,13 @@ public record MetaWebhookEventPayload(
                 }
 
                 @JsonIgnoreProperties(ignoreUnknown = true)
-                public record Messages(
-                    Audio audio,
+                public record Message(
                     String from,
                     String id,
-                    Text text,
-                    String type
+                    String timestamp,
+                    String type,
+                    Audio audio,
+                    Text text
                 ) {
                     @JsonIgnoreProperties(ignoreUnknown = true)
                     public record Audio(
